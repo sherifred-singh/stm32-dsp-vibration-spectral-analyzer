@@ -1,7 +1,7 @@
-# ⚙️ Real-Time Vibration Spectral Analyzer & Edge DSP Monitor
+﻿# âš™ï¸ Real-Time Vibration Spectral Analyzer & Edge DSP Monitor
 ### *Production-Grade 1024-Point Real FFT & Ping-Pong DMA Engine on STM32F446RE (ARM Cortex-M4 @ 180 MHz)*
 
-[![C/C++ CI Test Suite](https://img.shields.io/badge/CI%20Build-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/Sherifred123/stm32-dsp-vibration-spectral-analyzer/actions)
+[![C/C++ CI Test Suite](https://img.shields.io/badge/CI%20Build-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/sherifred-singh/stm32-dsp-vibration-spectral-analyzer/actions)
 [![Language](https://img.shields.io/badge/Language-Embedded%20C%20(C99)-00599C?style=for-the-badge&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C_(programming_language))
 [![Target Architecture](https://img.shields.io/badge/Target-STM32F446RE%20%2F%20Cortex--M4%20FPU-032347?style=for-the-badge&logo=stmicroelectronics&logoColor=white)](https://www.st.com)
 [![DSP Engine](https://img.shields.io/badge/DSP-1024--Point%20RFFT%20%7C%20Hanning-orange?style=for-the-badge)]()
@@ -13,7 +13,7 @@
 
 ---
 
-## 📌 System Architecture
+## ðŸ“Œ System Architecture
 
 <p align="center">
   <img src="docs/architecture.svg" alt="Vibration DSP Spectral Analyzer Architecture" width="100%">
@@ -21,7 +21,7 @@
 
 ---
 
-## 📑 Table of Contents
+## ðŸ“‘ Table of Contents
 
 - [1. System Overview & Problem Statement](#1-system-overview--problem-statement)
 - [2. Hardware-Timed Ingestion & Ping-Pong DMA](#2-hardware-timed-ingestion--ping-pong-dma)
@@ -50,26 +50,26 @@ This project delivers an **autonomous edge DSP pipeline** executing directly on 
 To guarantee strictly uniform time-domain sampling without software jitter or CPU blocking:
 
 ```
-                  ┌──────────────────────────────────────────────┐
-                  │   TIM2 TRGO Hardware Trigger @ 50,000 Hz    │
-                  └──────────────────────┬───────────────────────┘
-                                         │ Hardware Trigger
-                                         ▼
-                  ┌──────────────────────────────────────────────┐
-                  │    ADC1 12-Bit Peripheral (PA0 / ADC1_IN0)   │
-                  └──────────────────────┬───────────────────────┘
-                                         │ Direct DMA Request
-                                         ▼
-┌────────────────────────────────────────────────────────────────────────────────┐
-│                   DMA2 Stream 0 Double-Buffer Mode (DBM)                       │
-│                                                                                │
-│   ┌───────────────────────────┐             ┌───────────────────────────┐      │
-│   │   Buffer 0 (1024 Samples) │             │   Buffer 1 (1024 Samples) │      │
-│   │     [ACTIVE ADC TARGET]   │             │   [PROCESSED BY FPU CORE] │      │
-│   └───────────────────────────┘             └───────────────────────────┘      │
-│                 ▲                                         │                    │
-│                 └────────── Circular Hardware Swap ───────┘                    │
-└────────────────────────────────────────────────────────────────────────────────┘
+                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                  â”‚   TIM2 TRGO Hardware Trigger @ 50,000 Hz    â”‚
+                  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                         â”‚ Hardware Trigger
+                                         â–¼
+                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                  â”‚    ADC1 12-Bit Peripheral (PA0 / ADC1_IN0)   â”‚
+                  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                         â”‚ Direct DMA Request
+                                         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                   DMA2 Stream 0 Double-Buffer Mode (DBM)                       â”‚
+â”‚                                                                                â”‚
+â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”             â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”‚
+â”‚   â”‚   Buffer 0 (1024 Samples) â”‚             â”‚   Buffer 1 (1024 Samples) â”‚      â”‚
+â”‚   â”‚     [ACTIVE ADC TARGET]   â”‚             â”‚   [PROCESSED BY FPU CORE] â”‚      â”‚
+â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜             â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜      â”‚
+â”‚                 â–²                                         â”‚                    â”‚
+â”‚                 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Circular Hardware Swap â”€â”€â”€â”€â”€â”€â”€â”˜                    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 - **Sampling Rate:** $f_s = 50,000\,\text{Hz}$ ($\Delta t = 20\,\mu\text{s}$).
@@ -114,10 +114,10 @@ $$\text{THD} = \frac{\sqrt{V_2^2 + V_3^2 + V_4^2 + V_5^2}}{V_1} \times 100\%$$
 
 | Velocity Severity Band | RMS Range (mm/s) | Machine Health Condition | Action Required |
 |:---:|:---:|:---:|---|
-| **Zone A** | $< 1.4$ | 🟢 **GOOD** | Newly commissioned machinery; optimal balance. |
-| **Zone B** | $1.4 - 2.8$ | 🔵 **SATISFACTORY** | Normal continuous industrial operation. |
-| **Zone C** | $2.8 - 4.5$ | 🟡 **UNSATISFACTORY** | Mechanical degradation; schedule maintenance. |
-| **Zone D** | $\ge 4.5$ | 🔴 **UNACCEPTABLE** | Critical vibration; trip machine to prevent damage. |
+| **Zone A** | $< 1.4$ | ðŸŸ¢ **GOOD** | Newly commissioned machinery; optimal balance. |
+| **Zone B** | $1.4 - 2.8$ | ðŸ”µ **SATISFACTORY** | Normal continuous industrial operation. |
+| **Zone C** | $2.8 - 4.5$ | ðŸŸ¡ **UNSATISFACTORY** | Mechanical degradation; schedule maintenance. |
+| **Zone D** | $\ge 4.5$ | ðŸ”´ **UNACCEPTABLE** | Critical vibration; trip machine to prevent damage. |
 
 ---
 
@@ -136,7 +136,7 @@ $$\text{THD} = \frac{\sqrt{V_2^2 + V_3^2 + V_4^2 + V_5^2}}{V_1} \times 100\%$$
 
 ## 6. Automated Verification & Test Results
 
-### 🧪 Unity C Unit Test Suite (7/7 Passing)
+### ðŸ§ª Unity C Unit Test Suite (7/7 Passing)
 ```text
 ------------------------------------------------------------
    UNITY UNIT TEST EXECUTION: Embedded DSP Vibration Analyzer
@@ -155,7 +155,7 @@ $$\text{THD} = \frac{\sqrt{V_2^2 + V_3^2 + V_4^2 + V_5^2}}{V_1} \times 100\%$$
 ============================================================
 ```
 
-### 📊 Desktop Execution Benchmark Output
+### ðŸ“Š Desktop Execution Benchmark Output
 ```text
 ============================================================
    ROTATING MACHINERY VIBRATION SPECTRAL ANALYSIS REPORT
@@ -186,7 +186,7 @@ $$\text{THD} = \frac{\sqrt{V_2^2 + V_3^2 + V_4^2 + V_5^2}}{V_1} \times 100\%$$
 
 ### 1. Build and Run Host Demo
 ```bash
-git clone https://github.com/Sherifred123/stm32-dsp-vibration-spectral-analyzer.git
+git clone https://github.com/sherifred-singh/stm32-dsp-vibration-spectral-analyzer.git
 cd stm32-dsp-vibration-spectral-analyzer
 
 # Compile and run host simulation
@@ -224,7 +224,8 @@ At $50\,\text{kHz}$, servicing an interrupt for every individual ADC conversion 
 
 ---
 
-## 📄 License
+## ðŸ“„ License
 
 This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.  
 Designed and engineered by **Sherifred Singh**.
+
